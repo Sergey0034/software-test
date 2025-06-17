@@ -1,0 +1,5 @@
+<div class="card" *ngIf="library">
+  <button class="close-btn" (click)="close()">✖</button>
+  <p><strong>Название:</strong> {{library.FullName}}</p>
+  <p><strong>Адрес:</strong> {{library.ObjectAddress[0].Address}}</p>
+</div>

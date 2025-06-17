@@ -1,0 +1,37 @@
+<div class="container">
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Фильтр по названию"
+    [(ngModel)]="filterText"
+  />
+  <button class="search-btn" (click)="loadLibraries()">Найти</button>
+  <table>
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>Название</th>
+      <th>Адрес</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="libraries().length">
+    <tr *ngFor="let library of libraries(); let i = index" (click)="selectLibrary(library)">
+      <td>{{ i + 1 }}</td>
+      <td [innerHTML]="highlightWrapper(library.FullName, filterText())"></td>
+      <td>{{ library.ObjectAddress[0].Address }}</td>
+    </tr>
+    </tbody>
+    <tbody>
+    </tbody>
+  </table>
+  <div class="no-data" *ngIf="!libraries().length">Данных нет...</div>
+</div>
+<div class="card-wrapper" *ngIf="selectedLibrary()">
+  <app-library
+    [library]="selectedLibrary()"
+    [closeCallback]="clearSelection"
+  ></app-library>
+</div>
+
+
+
